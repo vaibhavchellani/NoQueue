@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         trial_createqueue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                Intent i=new Intent(getApplicationContext(),CreateQueue.class);
+                startActivity(i);
 
             }
         });
