@@ -1,23 +1,21 @@
 package Models;
 
-/**
- * Created by vaibhavchellani on 9/28/17.
- */
-
 public class Queue {
     public String description;
     public String name_of_queue;
     public String org_name;
     public int queue_status;
     public String queue_creation_time;
-
+    public token_zero users;
+    public int no_of_tokens;
 
     public Queue(String description, String name_of_queue, String org_name) {
         this.description = description;
         this.name_of_queue = name_of_queue;
         this.org_name = org_name;
         setQueue_status(1);
-
+        users=new token_zero();
+        no_of_tokens=0;
         Long tsLong = System.currentTimeMillis()/1000;
         setQueue_creation_time(tsLong.toString());
     }

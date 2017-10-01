@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ public class CreateQueue extends AppCompatActivity {
     @BindView(R.id.description_queue) EditText mdescription;
     @BindView(R.id.create_button) Button mCreateButton;
     private DatabaseReference mDatabase;
-
+    String TAG="CreateQueue";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,7 @@ public class CreateQueue extends AppCompatActivity {
                 mDatabase= FirebaseDatabase.getInstance().getReference();
                 Queue newQueue=new Queue(description,queue_name,org_name);
                 DatabaseReference QueueRef=mDatabase.child("queues").push();
+                Log.d(TAG, String.valueOf(QueueRef));
                 QueueRef.setValue(newQueue);
                 Toast.makeText(CreateQueue.this, "Queue Created ", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));

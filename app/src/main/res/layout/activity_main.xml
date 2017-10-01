@@ -30,8 +30,13 @@
             android:layout_height="wrap_content"
             android:text="create" />
 
-    </FrameLayout>
 
+    </FrameLayout>
+<Button
+    android:layout_width="match_parent"
+    android:text="get token"
+    android:id="@+id/getToken"
+    android:layout_height="wrap_content" />
 
 
 </LinearLayout>
