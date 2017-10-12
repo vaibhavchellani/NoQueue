@@ -61,7 +61,11 @@ public class JoinQueue extends AppCompatActivity {
         queue_ref.child("users").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                //TODO : get user list
+                //TODO : get user list to the current tokens and the next 2 tokens
+                /** you could probably use orderbyChild() fucntion provided by firebase for sorting results
+                 * see here ->https://firebase.google.com/docs/database/android/lists-of-data?#sort_data
+                 */
+
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
