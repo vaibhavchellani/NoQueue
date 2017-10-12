@@ -8,6 +8,7 @@ public class Queue {
     public String queue_creation_time;
     public token_zero users;
     public int no_of_tokens;
+    public int latest_token;
 
     public Queue(String description, String name_of_queue, String org_name) {
         this.description = description;
@@ -16,6 +17,7 @@ public class Queue {
         setQueue_status(1);
         users=new token_zero();
         no_of_tokens=0;
+        latest_token=0;
         Long tsLong = System.currentTimeMillis()/1000;
         setQueue_creation_time(tsLong.toString());
     }
