@@ -23,12 +23,6 @@ Create issues and if you want to work on an existing one please comment on the i
 * [Android Studio]
 
 
-## Authors
-
-* **Vaibhav Chellani** - *Initial work* (https://github.com/vaibhavchellani)
-* **Jasmeet Singh Bagga** - *Initial work* (https://github.com/Jasmeet1709)
-
-
 
 ## Check README for announcements .
 
