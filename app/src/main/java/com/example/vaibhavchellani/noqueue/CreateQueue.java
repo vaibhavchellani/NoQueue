@@ -42,7 +42,7 @@ public class CreateQueue extends AppCompatActivity {
                 String org_name=morg_name.getText().toString();
                 String queue_name=mqueue_name.getText().toString();
                 mDatabase= FirebaseDatabase.getInstance().getReference();
-                Queue newQueue=new Queue(description,queue_name,org_name);
+                Queue newQueue=new Queue(description,queue_name,org_name,"111111111");
                 DatabaseReference QueueRef=mDatabase.child("queues").push();
                 Log.d(TAG, String.valueOf(QueueRef));
                 QueueRef.setValue(newQueue);
