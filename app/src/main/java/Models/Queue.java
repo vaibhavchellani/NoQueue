@@ -5,19 +5,25 @@ public class Queue {
     public String name_of_queue;
     public String org_name;
     public int queue_status;
+    //queue start time is added but need input for this from UI and a date too
     public String queue_creation_time;
+    public String queue_start_time;
     public token_zero users;
     public int no_of_tokens;
     public int latest_token;
+    public int current_token;
 
-    public Queue(String description, String name_of_queue, String org_name) {
+    public Queue(String description, String name_of_queue, String org_name, String queue_start_time
+    ) {
         this.description = description;
         this.name_of_queue = name_of_queue;
         this.org_name = org_name;
         setQueue_status(1);
+        this.queue_start_time = queue_start_time;
         users=new token_zero();
         no_of_tokens=0;
         latest_token=0;
+        current_token=0;
         Long tsLong = System.currentTimeMillis()/1000;
         setQueue_creation_time(tsLong.toString());
     }
@@ -60,5 +66,21 @@ public class Queue {
 
     public void setOrg_name(String org_name) {
         this.org_name = org_name;
+    }
+
+    public String getQueue_start_time() {
+        return queue_start_time;
+    }
+
+    public void setQueue_start_time(String queue_start_time) {
+        this.queue_start_time = queue_start_time;
+    }
+
+    public int getCurrent_token() {
+        return current_token;
+    }
+
+    public void setCurrent_token(int current_token) {
+        this.current_token = current_token;
     }
 }
