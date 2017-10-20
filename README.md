@@ -28,4 +28,8 @@ Create issues and if you want to work on an existing one please comment on the i
 
 ## Be Active 
 
+<<<<<<< HEAD
 with love GDGBVP
+=======
+with love GDGBVP.
+>>>>>>> 7d3cc025b46946f5573852f40e1f0b96faeb1504
