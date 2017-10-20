@@ -46,6 +46,7 @@ public class JoinQueue extends AppCompatActivity {
         //replace the child id with the one we get from recycler view
         // TODO : queue_id to be replaced
         final String queue_id="-KwFoUxtH-JKChRWDy5f";
+        final String user_id="-KwFpT0L-T1SC0PU34cE";
         final DatabaseReference queue_ref=mdatabase.child("queues").child(queue_id);
         final int[] no_of_users = new int[1];
         final int[] latest_token = new int[1];
@@ -67,20 +68,14 @@ public class JoinQueue extends AppCompatActivity {
                 if(System.currentTimeMillis() >= Long.parseLong("1508348152055")){
                     current_token[0]=dataSnapshot.child("current_token").getValue(Integer.class);
                 }
-                //used delay method to get next token instead of exact amount of time between tokens
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //Do something after 100000ms
-                    }
-                }, 100000);
+                //something to be done on next click
+
                 //queue_ref.child("current_token").setValue(current_token[0]+1);
 
                 if(current_token[0]<latest_token[0]){
                     queue_ref.child("current_token").setValue(current_token[0]+1);
-                   if( dataSnapshot.child("users").child("-KwFpT0L-T1SC0PU34cE").child("token_no").getValue(Integer.class) == current_token[0]){
-                       queue_ref.child("users").child("-KwFpT0L-T1SC0PU34cE").child("token_status").setValue(0);
+                   if( dataSnapshot.child("users").child(user_id).child("token_no").getValue(Integer.class) == current_token[0]){
+                       queue_ref.child("users").child(user_id).child("token_status").setValue(0);
 
                    }
                     current_token[0]++;
