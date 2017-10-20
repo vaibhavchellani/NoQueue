@@ -94,6 +94,7 @@ public class JoinQueue extends AppCompatActivity {
                 queue_ref.child("no_of_tokens").setValue(no_of_users[0]+1);
 
                 //Todo redirect user to mainActivity
+
             }
         });
 
