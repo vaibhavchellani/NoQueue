@@ -1,9 +1,13 @@
 package com.example.vaibhavchellani.noqueue;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.sql.Time;
 
 import Models.Token;
 import butterknife.BindView;
@@ -43,6 +49,8 @@ public class JoinQueue extends AppCompatActivity {
         final DatabaseReference queue_ref=mdatabase.child("queues").child(queue_id);
         final int[] no_of_users = new int[1];
         final int[] latest_token = new int[1];
+        //added demo working of current token and need queue start date and time to make it work properly
+        final int[] current_token = new int[1];
         //no idea why have used value event listener instead of child event listener , if someone feels child event listener is better create an issue
         queue_ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -53,6 +61,34 @@ public class JoinQueue extends AppCompatActivity {
                 mTextView1.setText(dataSnapshot.child("name_of_queue").getValue(String.class));
                  no_of_users[0] =dataSnapshot.child("no_of_tokens").getValue(Integer.class);
                 latest_token[0]=dataSnapshot.child("latest_token").getValue(Integer.class);
+                // time of queue start time
+                final String time = dataSnapshot.child("queue_start_time").getValue(String.class);
+                // need to compare current time and queue start time to distribute token from starting time of queue
+                if(System.currentTimeMillis() >= Long.parseLong("1508348152055")){
+                    current_token[0]=dataSnapshot.child("current_token").getValue(Integer.class);
+                }
+                //used delay method to get next token instead of exact amount of time between tokens
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Do something after 100000ms
+                    }
+                }, 100000);
+                //queue_ref.child("current_token").setValue(current_token[0]+1);
+
+                if(current_token[0]<latest_token[0]){
+                    queue_ref.child("current_token").setValue(current_token[0]+1);
+                   if( dataSnapshot.child("users").child("-KwFpT0L-T1SC0PU34cE").child("token_no").getValue(Integer.class) == current_token[0]){
+                       queue_ref.child("users").child("-KwFpT0L-T1SC0PU34cE").child("token_status").setValue(0);
+
+                   }
+                    current_token[0]++;
+
+                }
+
+                Log.e("current token",String.valueOf(current_token[0]));
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -93,7 +129,8 @@ public class JoinQueue extends AppCompatActivity {
                 queue_ref.child("latest_token").setValue(latest_token[0]+1);
                 queue_ref.child("no_of_tokens").setValue(no_of_users[0]+1);
 
-                //Todo redirect user to mainActivity
+
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
 
