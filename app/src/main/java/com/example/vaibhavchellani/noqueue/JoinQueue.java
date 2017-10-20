@@ -1,6 +1,8 @@
 package com.example.vaibhavchellani.noqueue;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
@@ -37,17 +39,21 @@ public class JoinQueue extends AppCompatActivity {
     @BindView(R.id.textView2) TextView mTextView2;
     @BindView(R.id.enrollButton) Button enrollButton;
     private DatabaseReference mdatabase;
+    SharedPreferences msharedPrefs;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.joinqueue);
         ButterKnife.bind(this);
         mdatabase= FirebaseDatabase.getInstance().getReference();
+        msharedPrefs=getSharedPreferences("NoQueue", Context.MODE_PRIVATE);
         //replace the child id with the one we get from recycler view
         // TODO : queue_id to be replaced
-        final String queue_id="-KwFoUxtH-JKChRWDy5f";
+        final String queue_id="-KwtZ07j-UBk9vssAo6w";
         //TODO : user id to be replaced
-        final String user_id="-KwFpT0L-T1SC0PU34cE";
+        //final String user_id="-KwFpT0L-T1SC0PU34cE";
+        String user_id=msharedPrefs.getString(queue_id,"");
+        Toast.makeText(this, user_id, Toast.LENGTH_SHORT).show();
         final DatabaseReference queue_ref=mdatabase.child("queues").child(queue_id);
         final int[] no_of_users = new int[1];
         final int[] latest_token = new int[1];
@@ -120,9 +126,12 @@ public class JoinQueue extends AppCompatActivity {
                 Token newToken=new Token(latest_token[0]+1);
                 DatabaseReference setTokenRef=queue_ref.child("users").push();
                 //todo save the "setTokenRef" in sharedPrefs with the respective queue id
+                
                 setTokenRef.setValue(newToken);
                 queue_ref.child("latest_token").setValue(latest_token[0]+1);
                 queue_ref.child("no_of_tokens").setValue(no_of_users[0]+1);
+
+
 
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
