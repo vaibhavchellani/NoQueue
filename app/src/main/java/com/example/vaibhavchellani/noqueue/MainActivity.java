@@ -25,10 +25,6 @@ public class MainActivity extends AppCompatActivity {
     public LinearLayoutManager mlinearLayoutManager;
     public static class QueuesViewHolder extends RecyclerView.ViewHolder{
 
-//     @BindView(R.id.queue_name)   public String queueName;
-//     @BindView(R.id.queue_start_date)   public String queueStartDate;
-//     @BindView(R.id.queue_start_time)   public String queueStartTime;
-//     @BindView(R.id.queue_desc)   public String queueDescription;
         public TextView queueName;
         public TextView queueStartDate;
         public TextView queueStartTime;
