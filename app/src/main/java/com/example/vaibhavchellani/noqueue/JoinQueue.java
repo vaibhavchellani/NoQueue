@@ -51,8 +51,8 @@ public class JoinQueue extends AppCompatActivity {
         // TODO : queue_id to be replaced
         final String queue_id="-KwtZ07j-UBk9vssAo6w";
         //TODO : user id to be replaced
-        //final String user_id="-KwFpT0L-T1SC0PU34cE";
-        String user_id=msharedPrefs.getString(queue_id,"");
+        final String user_id="-KwFpT0L-T1SC0PU34cE";
+        //String user_id=msharedPrefs.getString(queue_id,"");
         Toast.makeText(this, user_id, Toast.LENGTH_SHORT).show();
         final DatabaseReference queue_ref=mdatabase.child("queues").child(queue_id);
         final int[] no_of_users = new int[1];
