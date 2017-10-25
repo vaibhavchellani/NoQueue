@@ -49,7 +49,7 @@ public class JoinQueue extends AppCompatActivity {
         msharedPrefs=getSharedPreferences("NoQueue", Context.MODE_PRIVATE);
         //replace the child id with the one we get from recycler view
         // TODO : queue_id to be replaced
-        final String queue_id="-KwtZ07j-UBk9vssAo6w";
+        final String queue_id="-KwFoUxtH-JKChRWDy5f";
         final String user_id=msharedPrefs.getString(queue_id,"");
         final DatabaseReference queue_ref=mdatabase.child("queues").child(queue_id);
         final int[] no_of_users = new int[1];
@@ -72,6 +72,9 @@ public class JoinQueue extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+        /**
+         * for getting the current token and 2 tokens after that 
+         */
         queue_ref.child("users").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -79,6 +82,9 @@ public class JoinQueue extends AppCompatActivity {
                 /** you could probably use orderbyChild() function provided by firebase for sorting results
                  * see here ->https://firebase.google.com/docs/database/android/lists-of-data?#sort_data
                  */
+
+
+
 
             }
             @Override
