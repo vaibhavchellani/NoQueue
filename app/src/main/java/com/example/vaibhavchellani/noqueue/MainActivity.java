@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -80,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
                 QueuesViewHolder.class,
                 mDatabase.child("queues")) {
             @Override
-            protected void populateViewHolder(final QueuesViewHolder viewHolder, final Queue model, final int position) {
+
+            protected void populateViewHolder(QueuesViewHolder viewHolder, final Queue model, final int position) {
+
 
                 if(model.getName_of_queue()!=null
                         && model.getDescription()!=null
@@ -93,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     viewHolder.queueStartDate.setText(model.getQueue_start_date());
                     viewHolder.queueStartTime.setText(model.getQueue_start_time());
                 }
+
 
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
