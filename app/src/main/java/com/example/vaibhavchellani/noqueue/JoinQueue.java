@@ -35,8 +35,8 @@ import butterknife.ButterKnife;
 
 public class JoinQueue extends AppCompatActivity {
 
-    @BindView(R.id.textView1) TextView mTextView1;
-    @BindView(R.id.textView2) TextView mTextView2;
+    @BindView(R.id.joinqueue_queue_name) TextView mTextView1;
+    @BindView(R.id.joinqueue_queue_desc) TextView mTextView2;
     @BindView(R.id.enrollButton) Button enrollButton;
     private DatabaseReference mdatabase;
     SharedPreferences msharedPrefs;
@@ -45,11 +45,12 @@ public class JoinQueue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.joinqueue);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
         mdatabase= FirebaseDatabase.getInstance().getReference();
         msharedPrefs=getSharedPreferences("NoQueue", Context.MODE_PRIVATE);
         //replace the child id with the one we get from recycler view
         // TODO : queue_id to be replaced
-        final String queue_id="-KwtZ07j-UBk9vssAo6w";
+        final String queue_id=intent.getStringExtra("QUEUE_ID");
         final String user_id=msharedPrefs.getString(queue_id,"");
         final DatabaseReference queue_ref=mdatabase.child("queues").child(queue_id);
         final int[] no_of_users = new int[1];
@@ -63,6 +64,7 @@ public class JoinQueue extends AppCompatActivity {
 
                 //// TODO: 10/12/17 get all the info about the queue and populate front end with them , see example below
                 mTextView1.setText(dataSnapshot.child("name_of_queue").getValue(String.class));
+                mTextView2.setText(dataSnapshot.child("description").getValue(String.class));
                 no_of_users[0] =dataSnapshot.child("no_of_tokens").getValue(Integer.class);
                 latest_token[0]=dataSnapshot.child("latest_token").getValue(Integer.class);
 
